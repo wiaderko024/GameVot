@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from producers.models import Producer
 
 
 class Game(models.Model):
@@ -7,6 +8,7 @@ class Game(models.Model):
     year = models.IntegerField(default=2000, blank=False, null=False)
     description = models.TextField(default="", blank=True, null=True)
     cover = models.ImageField(upload_to='game_covers', blank=True, null=True)
+    producer = models.ForeignKey(Producer, on_delete=models.DO_NOTHING, null=True, blank=True)
     slug = models.SlugField(null=True, editable=False)
 
     def __str__(self):
