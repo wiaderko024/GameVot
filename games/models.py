@@ -6,6 +6,7 @@ class Game(models.Model):
     title = models.CharField(max_length=300, blank=False, null=False, unique=True)
     year = models.IntegerField(default=2000, blank=False, null=False)
     description = models.TextField(default="", blank=True, null=True)
+    cover = models.ImageField(upload_to='game_covers', blank=True, null=True)
     slug = models.SlugField(null=True, editable=False)
 
     def __str__(self):
