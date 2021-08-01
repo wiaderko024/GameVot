@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_countries',
     'games',
-    'producers'
+    'producers',
+    'categories',
 ]
 
 MIDDLEWARE = [
