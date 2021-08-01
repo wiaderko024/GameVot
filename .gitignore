@@ -1,0 +1,12 @@
+.Python
+__pycache__
+.DS_Store
+.vscode
+venv/
+.idea
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+db.sqlite3
+media/
+
