@@ -24,10 +24,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ producer.name }}</h5>
                                 <p class="card-text">{{ producer.description }}</p>
-                                <p class="card-text">
-                                    <small class="text-muted">Dark Souls....</small>
-                                    <a href="{% url 'producers:producer_page' producer.slug %}"><button class="btn btn-danger" style="float: right;">Review producer</button></a>
-                                </p>
+                                <a href="{% url 'producers:producer_page' producer.slug %}"><button class="btn btn-danger" style="float: right;">Review producer</button></a>
                             </div>
                         </div>
                     </div>
