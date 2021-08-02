@@ -7,5 +7,33 @@
 
 {% block content %}
     {% include 'navbar.html' %}
-    <h1>ALL PRODUCERS</h1>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center mt-4 mb-3" style="color: #dc3545;">GAMEVOT.COM GAMES PRODUCERS DATABASE</h1>
+            <hr>
+        </div>
+        <div class="row justify-content-center">
+
+            {% for producer in producers %}
+                <div class="card mt-3 col-md-8">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ producer.logo.url }}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ producer.name }}</h5>
+                                <p class="card-text">{{ producer.description }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">Dark Souls....</small>
+                                    <a href="#"><button class="btn btn-danger" style="float: right;">Review producer</button></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
 {% endblock %}
