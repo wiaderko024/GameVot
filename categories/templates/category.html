@@ -1,0 +1,13 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}
+    <title>GameVot.com | {{ category.name }}</title>
+{% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' with categories=categories %}
+    {% for game in games %}
+        <h1>{{ game.title }}</h1>
+    {% endfor %}
+{% endblock %}
