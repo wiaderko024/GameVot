@@ -19,7 +19,7 @@
                     <div class="card-body justify-content-center">
                         <h4 class="card-title">{{ game.title }}</h4>
                         <small style="display: block;">{{ game.producer.name }}</small>
-                        <a href="#" class="btn btn-danger mt-3">Watch game</a>
+                        <a href="{% url 'games:game_page' game.slug %}" class="btn btn-danger mt-3">Watch game</a>
                     </div>
                 </div>
             {% endfor %}
