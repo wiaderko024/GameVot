@@ -7,5 +7,33 @@
 
 {% block content %}
     {% include 'navbar.html' %}
-    <h1>ALL GAMES</h1>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center mt-4 mb-3" style="color: #dc3545;">GAMEVOT.COM GAMES DATABASE</h1>
+            <hr>
+        </div>
+        <div class="row justify-content-center">
+
+            {% for game in games %}
+                <div class="card mt-3 col-md-8">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ game.cover.url }}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ game.title }} - {{ game.producer.name }}</h5>
+                                <p class="card-text">{{ game.description }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">RPG, jRPG itp.</small>
+                                    <a href="#"><button class="btn btn-danger" style="float: right;">Watch reviews</button></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        
+        </div>
+    </div>
 {% endblock %}
