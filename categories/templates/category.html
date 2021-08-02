@@ -7,7 +7,22 @@
 
 {% block content %}
     {% include 'navbar.html' with categories=categories %}
-    {% for game in games %}
-        <h1>{{ game.title }}</h1>
-    {% endfor %}
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center mt-4 mb-3" style="color: #dc3545;">{{ category.name }}</h1>
+            <hr>
+        </div>
+        <div class="row justify-content-center mt-3">
+            {% for game in games %}
+                <div class="card mt-3 text-center mx-3" style="width: 18rem; padding: 5px;">
+                    <img src="{{ game.cover.url }}" class="card-img-top" alt="...">
+                    <div class="card-body justify-content-center">
+                        <h4 class="card-title">{{ game.title }}</h4>
+                        <small style="display: block;">{{ game.producer.name }}</small>
+                        <a href="#" class="btn btn-danger mt-3">Watch game</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
