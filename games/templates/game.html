@@ -7,5 +7,24 @@
 
 {% block content %}
     {% include 'navbar.html' %}
-    <h1>{{ game.title }}</h1>
+    <div class="container">
+        <div class="row">
+            <div class="card mt-5 col-md-12">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ game.cover.url }}" class="img-fluid rounded-start" alt="..." style="width: 300px; height: 400px;">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h1 class="card-title text-center">{{ game.title }} - {{ game.producer.name }}</h1>
+                            <p class="card-text mt-3">{{ game.description }}</p>
+                            <p class="card-text">
+                                <small class="text-muted" style="position: absolute; bottom: 0; right: 30px; margin-bottom: 10px;">RPG, jRPG itp.</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
