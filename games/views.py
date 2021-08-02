@@ -10,3 +10,13 @@ def all_games(request):
     }
 
     return render(request, 'all_games.html', context=context)
+
+
+def game_page(request, game_slug):
+    game = Game.objects.get(slug=game_slug)
+
+    context = {
+        'game': game,
+    }
+
+    return render(request, 'game.html', context=context)
