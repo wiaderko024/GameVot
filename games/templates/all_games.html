@@ -25,7 +25,9 @@
                                 <h5 class="card-title">{{ game.title }} - {{ game.producer.name }}</h5>
                                 <p class="card-text">{{ game.description }}</p>
                                 <p class="card-text">
-                                    <small class="text-muted">RPG, jRPG itp.</small>
+                                    {% for category in game.category.all %}
+                                        <small class="text-muted">{{ category.name }}</small>
+                                    {% endfor %}
                                     <a href="{% url 'games:game_page' game.slug %}"><button class="btn btn-danger" style="float: right;">Watch reviews</button></a>
                                 </p>
                             </div>

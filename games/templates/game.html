@@ -19,7 +19,9 @@
                             <h1 class="card-title text-center">{{ game.title }} - {{ game.producer.name }}</h1>
                             <p class="card-text mt-3">{{ game.description }}</p>
                             <p class="card-text">
-                                <small class="text-muted" style="position: absolute; bottom: 0; right: 30px; margin-bottom: 10px;">RPG, jRPG itp.</small>
+                                {% for category in game.category.all %}
+                                    <small class="text-muted" style="position: absolute; bottom: 0; right: 30px; margin-bottom: 10px;">{{ category.name }}</small>
+                                {% endfor %}
                             </p>
                         </div>
                     </div>
