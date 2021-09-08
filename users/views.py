@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, LoginForm
 from .models import Profile
 from categories.models import Category
@@ -54,11 +55,20 @@ def sign_up_page(request):
     return render(request, 'signup.html', context)
 
 
+@login_required
 def user_dashboard(request):
     categories = Category.objects.all()
+    user = request.user
+    form = SignUpForm(instance=user)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form = SignUpForm(request.POST or None, request.FILES or None)
+            form.save()
 
     context = {
         'categories': categories,
+        'form': form,
     }
 
     return render(request, 'dashboard.html', context)
