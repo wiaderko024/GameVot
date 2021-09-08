@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, LoginForm, ChangeAvatarForm
+from .forms import SignUpForm, LoginForm, ChangeAvatarForm, ChangePasswordForm
 from .models import Profile
 from categories.models import Category
 
@@ -84,8 +84,10 @@ def change_avatar(request):
         if form.is_valid():
             user = request.user
             avatar = form.cleaned_data.get('avatar')
+
             user.profile.avatar = avatar
             user.profile.save()
+            
             return redirect('users:dashboard')
 
     context = {
@@ -94,3 +96,26 @@ def change_avatar(request):
     }
 
     return render(request, 'avatar.html', context)
+
+
+def change_password(request):
+    categories = Category.objects.all()
+    form = ChangePasswordForm()
+
+    if request.method == 'POST':
+        form = ChangePasswordForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            password = form.cleaned_data.get('password1')
+            user = request.user
+
+            user.set_password(password)
+            user.save()
+
+            return redirect('home_page')
+
+    context = {
+        'categories': categories,
+        'form': form,
+    }
+
+    return render(request, 'password.html', context)
