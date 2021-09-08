@@ -1,6 +1,13 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+
+
+class LoginForm(AuthenticationForm):
+    def __init__(self):
+        super(LoginForm, self).__init__()
+        self.fields['username'].widget = forms.TextInput(attrs={'placeholder': 'Username'})
+        self.fields['password'].widget = forms.PasswordInput(attrs={'placeholder': 'Password'})
 
 
 class SignUpForm(UserCreationForm):

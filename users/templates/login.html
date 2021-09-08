@@ -7,5 +7,18 @@
 
 {% block content %}
     {% include 'navbar.html' with categories=categories %}
-    <h1>LOGIN</h1>
+
+    <div class="card text-white bg-danger col-md-3 mx-auto text-center" style="margin-top: 10%;">
+        <div class="card-header"><h3>Log in</h3></div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                    <p>{{ field }}</p>
+                {% endfor %}
+                <button class="btn btn-light" style="color: #dc3545" type="submit">Log in</button>
+            </form>
+        </div>
+    </div>
+
 {% endblock %}
