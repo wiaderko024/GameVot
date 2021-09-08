@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_countries',
     'pages',
+    'users',
     'games',
     'producers',
     'categories',
