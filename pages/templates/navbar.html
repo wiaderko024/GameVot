@@ -37,7 +37,7 @@
 
             {% if user.is_authenticated %}
                 <a href="{% url 'users:logout' %}"><button class="btn btn-light" style="color: #dc3545">Logout</button></a>
-                <a href="#"><button class="btn btn-light" style="color: #dc3545; margin-left: 5px;">Profile</button></a>
+                <a href="{% url 'users:dashboard' %}"><button class="btn btn-light" style="color: #dc3545; margin-left: 5px;">Profile</button></a>
             {% else %}
                 <a href="{% url 'users:login' %}"><button class="btn btn-light" style="color: #dc3545">Login</button>
                 <a href="{% url 'users:sign_up' %}"><button class="btn btn-light" style="color: #dc3545; margin-left: 5px;">Sign up</button></a>

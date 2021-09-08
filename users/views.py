@@ -52,3 +52,13 @@ def sign_up_page(request):
     }
 
     return render(request, 'signup.html', context)
+
+
+def user_dashboard(request):
+    categories = Category.objects.all()
+
+    context = {
+        'categories': categories,
+    }
+
+    return render(request, 'dashboard.html', context)
