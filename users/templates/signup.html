@@ -1,5 +1,6 @@
 {% extends 'base_index.html' %}
 {% load static %}
+{% load bootstrap %}
 
 {% block title %}
     <title>GameVot.com | Sign up</title>
@@ -8,7 +9,7 @@
 {% block content %}
     {% include 'navbar.html' with categories=categories %}
 
-    <div class="card text-white bg-danger col-md-3 mx-auto text-center" style="margin-top: 10%;">
+    <div class="card text-white bg-danger col-md-5 mx-auto text-center" style="margin-top: 33px;">
         <div class="card-header"><h3>Sign up</h3></div>
         <div class="card-body">
             <form method="post" enctype="multipart/form-data">
@@ -21,11 +22,12 @@
                                 {{ field }}
                             </p>
                         {% else %}
-                            {{ field }}
+                            {{ field|bootstrap }}
                         {% endif %}
                     </p>
                 {% endfor %}
-                <button class="btn btn-light" style="color: #dc3545" type="submit" name="signup">Sign up</button>
+                <p>Already have account? Click here to <a href="{% url 'users:login' %}">log in</a></p>
+                <button class="btn btn-light" style="color: #dc3545; margin-top: 10px; margin-bottom: 10px;" type="submit" name="signup">Sign up</button>
             </form>
         </div>
     </div>

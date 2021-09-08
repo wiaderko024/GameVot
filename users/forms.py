@@ -22,5 +22,5 @@ class SignUpForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
-        self.fields['password1'].widget = forms.PasswordInput(attrs={'placeholder': 'Password'})
-        self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Confirm Password'})
+        self.fields['password1'].widget = forms.PasswordInput(attrs={'placeholder': 'Password', 'label': ''})
+        self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Confirm Password', 'label': ''})
