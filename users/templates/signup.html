@@ -1,0 +1,14 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+    <h3>Sign up</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" name="signup">Sign up</button>
+    </form>
+{% endblock %}
