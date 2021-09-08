@@ -27,6 +27,11 @@ def login_page(request):
     return render(request, 'login.html', context=context)
 
 
+def logout_page(request):
+    logout(request)
+    return redirect('users:login')
+
+
 def sign_up_page(request):
     categories = Category.objects.all()
     form = SignUpForm()
