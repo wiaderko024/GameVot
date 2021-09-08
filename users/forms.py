@@ -24,3 +24,11 @@ class SignUpForm(UserCreationForm):
         super(SignUpForm, self).__init__(*args, **kwargs)
         self.fields['password1'].widget = forms.PasswordInput(attrs={'placeholder': 'Password', 'label': ''})
         self.fields['password2'].widget = forms.PasswordInput(attrs={'placeholder': 'Confirm Password', 'label': ''})
+
+
+class ChangeAvatarForm(forms.Form):
+    avatar = forms.ImageField()
+
+    class Meta:
+        model = User
+        fields = []

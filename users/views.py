@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, LoginForm
+from .forms import SignUpForm, LoginForm, ChangeAvatarForm
 from .models import Profile
 from categories.models import Category
 
@@ -62,8 +62,8 @@ def user_dashboard(request):
     form = SignUpForm(instance=user)
 
     if request.method == 'POST':
+        form = SignUpForm(request.POST or None, request.FILES or None)
         if form.is_valid():
-            form = SignUpForm(request.POST or None, request.FILES or None)
             form.save()
 
     context = {
@@ -72,3 +72,25 @@ def user_dashboard(request):
     }
 
     return render(request, 'dashboard.html', context)
+
+
+@login_required
+def change_avatar(request):
+    categories = Category.objects.all()
+    form = ChangeAvatarForm()
+
+    if request.method == 'POST':
+        form = ChangeAvatarForm(request.POST or None, request.FILES or None)
+        if form.is_valid():
+            user = request.user
+            avatar = form.cleaned_data.get('avatar')
+            user.profile.avatar = avatar
+            user.profile.save()
+            return redirect('users:dashboard')
+
+    context = {
+        'categories': categories,
+        'form': form,
+    }
+
+    return render(request, 'avatar.html', context)
