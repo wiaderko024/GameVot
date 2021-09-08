@@ -28,5 +28,18 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            {% for review in reviews %}
+                <div class="card col-md-6 mx-auto mt-5">
+                    <div class="card-header">
+                        <h5 style="display: inline;">{{ review.user.username }}</h5>
+                        <small style="float: right;">{{ review.created_at }}</small>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">{{ review.text }}</p>
+                     </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
