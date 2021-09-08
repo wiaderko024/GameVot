@@ -4,6 +4,16 @@ from .models import Profile
 from categories.models import Category
 
 
+def login_page(request):
+    categories = Category.objects.all()
+
+    context = {
+        'categories': categories,
+    }
+
+    return render(request, 'login.html', context=context)
+
+
 def sign_up_page(request):
     categories = Category.objects.all()
     form = SignUpForm()
