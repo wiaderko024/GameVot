@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm
 from .models import Profile
+from categories.models import Category
 
 
 def sign_up_page(request):
+    categories = Category.objects.all()
     form = SignUpForm()
 
     if request.method == 'POST':
@@ -17,6 +19,7 @@ def sign_up_page(request):
             return redirect('home_page')
 
     context = {
+        'categories': categories,
         'form': form,
     }
 
