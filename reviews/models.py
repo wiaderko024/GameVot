@@ -1,3 +1,20 @@
 from django.db import models
+from django.contrib.auth.models import User
+from games.models import Game
+from django.utils import timezone
 
-# Create your models here.
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=False, null=False)
+    game = models.ForeignKey(Game, on_delete=models.DO_NOTHING, blank=False, null=False)
+    text = models.TextField(default='', blank=False, null=False)
+    created_at = models.DateTimeField(editable=False, null=False)
+
+    def __str__(self):
+        return self.user.username
+
+    def save(self, *args, **kwargs):
+        if not self.created_at:
+            self.created_at = timezone.now()
+
+        return super(Review, self).save(*args, **kwargs)
