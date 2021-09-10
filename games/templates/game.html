@@ -28,24 +28,28 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-9 mt-5 mx-auto">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>Write your review</h5>
-                    </div>
-                    <div class="card-body">
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% for field in form %}
-                                {{ field }}
-                            {% endfor %}
-                            <button class="btn btn-danger" style="margin-top: 20px; float: right; margin-right: 40px;" type="submit">Review</button>
-                        </form>
+
+        {% if request.user.is_authenticated %}
+            <div class="row">
+                <div class="col-md-9 mt-5 mx-auto">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Write your review</h5>
+                        </div>
+                        <div class="card-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    {{ field }}
+                                {% endfor %}
+                                <button class="btn btn-danger" style="margin-top: 20px; float: right; margin-right: 40px;" type="submit">Review</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        {% endif %}
+
         <div class="row" style="margin-bottom: 150px;">
             {% for review in reviews %}
                 <div class="card col-md-8 mx-auto mt-4">
