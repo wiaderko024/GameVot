@@ -3,6 +3,7 @@ from .models import Game
 from categories.models import Category
 from reviews.models import Review, Rate
 from reviews.forms import ReviewForm
+from activities.models import Activity
 
 
 def all_games(request):
@@ -21,12 +22,15 @@ def game_page(request, game_slug):
     game = Game.objects.get(slug=game_slug)
     categories = Category.objects.all()
     reviews = Review.objects.filter(game=game)
-    user_rate = None
     rate_scale = [i for i in range(1, 11)]
     form = ReviewForm()
 
     if request.user.is_authenticated:
         user_rate = Rate.objects.filter(user=request.user, game=game)
+        Activity.objects.create(visit=True, game_id=game.id, user=request.user)
+    else:
+        user_rate = None
+        Activity.objects.create(visit=True, game_id=game.id, user=request.user)
 
     if request.method == 'POST':
         form = ReviewForm(request.POST or None, request.FILES or None)
