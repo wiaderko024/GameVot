@@ -30,6 +30,18 @@
         </div>
 
         {% if request.user.is_authenticated %}
+            {% if user_rate|length > 0 %}
+                {{ user_rate.first }}
+            {% else %}
+                <div class="row" style="display: inline;">
+                    {% for star in rate_scale %}
+                        <a href="{% url 'reviews:rate_game' game.id star %}">{{ star }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {% if request.user.is_authenticated %}
             <div class="row">
                 <div class="col-md-9 mt-5 mx-auto">
                     <div class="card">

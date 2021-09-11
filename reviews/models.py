@@ -28,4 +28,4 @@ class Rate(models.Model):
     rate = models.PositiveSmallIntegerField(editable=True, choices=scale, blank=False, null=False)
 
     def __str__(self):
-        return user.username + ' - ' + str(rate)
+        return self.user.username + ' - ' + str(self.rate)
