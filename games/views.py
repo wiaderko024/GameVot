@@ -21,9 +21,12 @@ def game_page(request, game_slug):
     game = Game.objects.get(slug=game_slug)
     categories = Category.objects.all()
     reviews = Review.objects.filter(game=game)
+    user_rate = None
     rate_scale = [i for i in range(1, 11)]
-    user_rate = Rate.objects.filter(game=game, user=request.user)
     form = ReviewForm()
+
+    if request.user.is_authenticated:
+        user_rate = Rate.objects.filter(user=request.user, game=game)
 
     if request.method == 'POST':
         form = ReviewForm(request.POST or None, request.FILES or None)

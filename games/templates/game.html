@@ -5,6 +5,14 @@
     <title>GameVot.com | {{ game.title }}</title>
 {% endblock %}
 
+{% block styles %}
+    <style>
+        .star {
+            text-decoration: none;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     {% include 'navbar.html' with categories=categories %}
     <div class="container">
@@ -30,12 +38,16 @@
         </div>
 
         {% if request.user.is_authenticated %}
-            {% if user_rate|length > 0 %}
-                {{ user_rate.first }}
-            {% else %}
-                <div class="row" style="display: inline;">
+            {% if user_rate %}
+                <div class="d-flex justify-content-end mt-2">
                     {% for star in rate_scale %}
-                        <a href="{% url 'reviews:rate_game' game.id star %}">{{ star }}</a>
+                        <a class="star {% if star <= user_rate.first.rate %}fas fa-star{% else %}far fa-star{% endif %}" href="{% url 'reviews:rate_game' game.id star %}"></a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-end mt-2">
+                    {% for star in rate_scale %}
+                        <a class="star far fa-star" href="{% url 'reviews:rate_game' game.id star %}"></a>
                     {% endfor %}
                 </div>
             {% endif %}
