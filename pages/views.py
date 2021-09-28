@@ -10,3 +10,13 @@ def home_page(request):
     }
 
     return render(request, 'index.html', context=context)
+
+
+def rankings_page(request):
+    categories = Category.objects.all()
+
+    context = {
+        'categories': categories,
+    }
+
+    return render(request, 'rankings.html', context=context)
