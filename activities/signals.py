@@ -19,6 +19,18 @@ def create_rate_activity(sender, instance, created, **kwargs):
 
         game = Game.objects.get(pk=instance.game.id)
         game.rates += 1
+
+        if game.avg_rate is None:
+            game.avg_rate = float(instance.rate)
+        else:
+            rates = Rate.objects.filter(game=game)
+
+            tmp = 0
+            for rate in rates:
+                tmp += rate.rate
+
+            game.avg_rate = tmp / len(rates)
+
         game.save()
 
 
