@@ -12,6 +12,8 @@ class Game(models.Model):
     producer = models.ForeignKey(Producer, on_delete=models.DO_NOTHING, null=True, blank=True)
     category = models.ManyToManyField(Category, blank=True)
     slug = models.SlugField(null=True, editable=False)
+    rates = models.IntegerField(default=0, editable=False, blank=True, null=False)
+    reviews = models.IntegerField(default=0, editable=False, blank=True, null=False)
 
     def __str__(self):
         return self.title + ' ' + str(self.year)
