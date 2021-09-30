@@ -27,10 +27,11 @@ def game_page(request, game_slug):
 
     if request.user.is_authenticated:
         user_rate = Rate.objects.filter(user=request.user, game=game)
-        Activity.objects.create(visit=True, game_id=game.id, user=request.user)
+        if not request.user.is_superuser:
+            Activity.objects.create(visit=True, game_id=game.id, user=request.user)
     else:
         user_rate = None
-        Activity.objects.create(visit=True, game_id=game.id, user=request.user)
+        Activity.objects.create(visit=True, game_id=game.id)
 
     if request.method == 'POST':
         form = ReviewForm(request.POST or None, request.FILES or None)
