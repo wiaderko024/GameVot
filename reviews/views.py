@@ -13,10 +13,20 @@ def rate_game(request, game_id, rate):
             rates = Rate.objects.filter(game=game, user=request.user)
             if rates.exists():
                 rates.update(rate=rate)
+
+                all_rates = Rate.objects.filter(game=game)
+                tmp = 0
+
+                for r in all_rates:
+                    tmp += r.rate
+
+                game.avg_rate = tmp / len(all_rates)
+                game.save()
             else:
                 Rate.objects.create(game=game, user=request.user, rate=rate)
+                # logic for counting rates and average rate for CREATE option is in activities.signals file
         except (KeyError, Rate.rate.DoesNotExist):
-            pass
+            print(KeyError)
 
         return redirect('games:game_page', game.slug)
 
