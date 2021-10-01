@@ -24,7 +24,20 @@ def rate_game(request, game_id, rate):
                 game.save()
             else:
                 Rate.objects.create(game=game, user=request.user, rate=rate)
-                # logic for counting rates and average rate for CREATE option is in activities.signals file
+
+                game.rates += 1
+
+                if game.avg_rate is None:
+                    game.avg_rate = float(instance.rate)
+                else:
+                    rates = Rate.objects.filter(game=game)
+
+                    tmp = 0
+                    for rate in rates:
+                        tmp += rate.rate
+
+                    game.avg_rate = tmp / len(rates)
+                    game.save()
         except (KeyError, Rate.rate.DoesNotExist):
             print(KeyError)
 
