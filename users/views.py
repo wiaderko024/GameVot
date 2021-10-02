@@ -98,6 +98,7 @@ def change_avatar(request):
     return render(request, 'avatar.html', context)
 
 
+@login_required
 def change_password(request):
     categories = Category.objects.all()
     form = ChangePasswordForm()

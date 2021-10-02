@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from categories.models import Category
 from games.models import Game
 
 
 def home_page(request):
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
 
     context = {
         'categories': categories,
@@ -42,3 +46,8 @@ def rankings_page(request):
     }
 
     return render(request, 'rankings.html', context=context)
+
+
+def search_page(request, wanted):
+    print(wanted)
+    return render(request, 'search_page.html')
