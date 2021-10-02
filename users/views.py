@@ -8,6 +8,11 @@ from categories.models import Category
 
 def login_page(request):
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
     form = LoginForm()
 
     if request.method == 'POST':
@@ -35,6 +40,11 @@ def logout_page(request):
 
 def sign_up_page(request):
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
     form = SignUpForm()
 
     if request.method == 'POST':
@@ -58,6 +68,11 @@ def sign_up_page(request):
 @login_required
 def user_dashboard(request):
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
     user = request.user
     form = SignUpForm(instance=user)
 
@@ -77,6 +92,11 @@ def user_dashboard(request):
 @login_required
 def change_avatar(request):
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
     form = ChangeAvatarForm()
 
     if request.method == 'POST':
@@ -101,6 +121,11 @@ def change_avatar(request):
 @login_required
 def change_password(request):
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
     form = ChangePasswordForm()
 
     if request.method == 'POST':

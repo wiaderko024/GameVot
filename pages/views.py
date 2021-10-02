@@ -21,6 +21,10 @@ def home_page(request):
 def rankings_page(request):
     categories = Category.objects.all()
 
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
     games = Game.objects.all().order_by('avg_rate').reverse()
     best_games = []
 
@@ -51,6 +55,11 @@ def rankings_page(request):
 
 def search_page(request, wanted):
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
     games = Game.objects.all()
     producers = Producer.objects.all()
     tmp = wanted.lower()
@@ -66,9 +75,6 @@ def search_page(request, wanted):
         name = producer.name.lower()
         if tmp in name:
             producers_results.append(producer)
-
-    print(games_results)
-    print(producers_results)
 
     context = {
         'categories': categories,

@@ -7,8 +7,13 @@ from activities.models import Activity
 
 
 def all_games(request):
-    games = Game.objects.all()
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
+    games = Game.objects.all()
 
     context = {
         'games': games,
@@ -19,8 +24,13 @@ def all_games(request):
 
 
 def game_page(request, game_slug):
-    game = Game.objects.get(slug=game_slug)
     categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
+    game = Game.objects.get(slug=game_slug)
     reviews = Review.objects.filter(game=game)
     rate_scale = [i for i in range(1, 11)]
     form = ReviewForm()
