@@ -3,5 +3,53 @@
 
 {% block content %}
     {% include 'navbar.html' with categories=categories %}
-    <h1>search page</h1>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center mt-4 mb-3" style="color: #dc3545;">Search results</h1>
+            <hr>
+        </div>
+        <div class="row justify-content-center" style="margin-bottom: 100px;">
+            {% if games_results|length == 0 and producers_results|length == 0 %}
+                <h3 class="text-center">No results</h3>
+            {% else %}
+                {% for game in games_results %}
+                    <div class="card mt-3 col-md-8">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ game.cover.url }}" class="img-fluid rounded-start" alt="..." width="284px" height="350px">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ game.title }} - {{ game.producer.name }}</h5>
+                                    <p class="card-text">{{ game.description }}</p>
+                                    <p class="card-text">
+                                        {% for category in game.category.all %}
+                                            <small class="text-muted">{{ category.name }}</small>
+                                        {% endfor %}
+                                        <a href="{% url 'games:game_page' game.slug %}"><button class="btn btn-danger" style="float: right;">Watch reviews</button></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for producer in producers_results %}
+                    <div class="card mt-3 col-md-8">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="{{ producer.logo.url }}" class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ producer.name }}</h5>
+                                    <p class="card-text">{{ producer.description }}</p>
+                                    <a href="{% url 'producers:producer_page' producer.slug %}"><button class="btn btn-danger" style="float: right;">Review producer</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from categories.models import Category
 from games.models import Game
+from producers.models import Producer
 
 
 def home_page(request):
@@ -49,5 +50,30 @@ def rankings_page(request):
 
 
 def search_page(request, wanted):
-    print(wanted)
-    return render(request, 'search_page.html')
+    categories = Category.objects.all()
+    games = Game.objects.all()
+    producers = Producer.objects.all()
+    tmp = wanted.lower()
+    games_results = []
+    producers_results = []
+
+    for game in games:
+        title = game.title.lower()
+        if tmp in title:
+            games_results.append(game)
+
+    for producer in producers:
+        name = producer.name.lower()
+        if tmp in name:
+            producers_results.append(producer)
+
+    print(games_results)
+    print(producers_results)
+
+    context = {
+        'categories': categories,
+        'games_results': games_results,
+        'producers_results': producers_results,
+    }
+
+    return render(request, 'search_page.html', context=context)
