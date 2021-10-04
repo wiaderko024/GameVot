@@ -11,8 +11,29 @@ def home_page(request):
         wanted = request.POST.get('search')
         return redirect('search_page', wanted)
 
+    games = Game.objects.all().order_by('avg_rate').reverse()
+    best_games = []
+
+    for i in range(0, 3):
+        best_games.append(games[i])
+
+    games = Game.objects.all().order_by('year').reverse()
+    new_games = []
+
+    for i in range(0, 3):
+        new_games.append(games[i])
+
+    games = Game.objects.all().order_by('created_at').reverse()
+    last_games = []
+
+    for i in range(0, 3):
+        last_games.add(games[i])
+
     context = {
         'categories': categories,
+        'best_games': best_games,
+        'new_games': new_games,
+        'last_games': last_games,
     }
 
     return render(request, 'index.html', context=context)
