@@ -8,14 +8,12 @@ from categories.models import Category
 
 def login_page(request):
     categories = Category.objects.all()
-
-    if request.method == 'POST':
-        wanted = request.POST.get('search')
-        return redirect('search_page', wanted)
-
     form = LoginForm()
 
     if request.method == 'POST':
+        if request.POST.get('search') is not None:
+            return redirect('search_page', request.POST.get('search'))
+
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -40,14 +38,12 @@ def logout_page(request):
 
 def sign_up_page(request):
     categories = Category.objects.all()
-
-    if request.method == 'POST':
-        wanted = request.POST.get('search')
-        return redirect('search_page', wanted)
-
     form = SignUpForm()
 
     if request.method == 'POST':
+        if request.POST.get('search') is not None:
+            return redirect('search_page', request.POST.get('search'))
+
         form = SignUpForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             user = form.save()
@@ -68,15 +64,13 @@ def sign_up_page(request):
 @login_required
 def user_dashboard(request):
     categories = Category.objects.all()
-
-    if request.method == 'POST':
-        wanted = request.POST.get('search')
-        return redirect('search_page', wanted)
-
     user = request.user
     form = SignUpForm(instance=user)
 
     if request.method == 'POST':
+        if request.POST.get('search') is not None:
+            return redirect('search_page', request.POST.get('search'))
+
         form = SignUpForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             form.save()
@@ -92,14 +86,12 @@ def user_dashboard(request):
 @login_required
 def change_avatar(request):
     categories = Category.objects.all()
-
-    if request.method == 'POST':
-        wanted = request.POST.get('search')
-        return redirect('search_page', wanted)
-
     form = ChangeAvatarForm()
 
     if request.method == 'POST':
+        if request.POST.get('search') is not None:
+            return redirect('search_page', request.POST.get('search'))
+
         form = ChangeAvatarForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             user = request.user
@@ -121,14 +113,12 @@ def change_avatar(request):
 @login_required
 def change_password(request):
     categories = Category.objects.all()
-
-    if request.method == 'POST':
-        wanted = request.POST.get('search')
-        return redirect('search_page', wanted)
-
     form = ChangePasswordForm()
 
     if request.method == 'POST':
+        if request.POST.get('search') is not None:
+            return redirect('search_page', request.POST.get('search'))
+
         form = ChangePasswordForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             password = form.cleaned_data.get('password1')

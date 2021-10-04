@@ -25,11 +25,6 @@ def all_games(request):
 
 def game_page(request, game_slug):
     categories = Category.objects.all()
-
-    if request.method == 'POST':
-        wanted = request.POST.get('search')
-        return redirect('search_page', wanted)
-
     game = Game.objects.get(slug=game_slug)
     reviews = Review.objects.filter(game=game)
     rate_scale = [i for i in range(1, 11)]
@@ -44,6 +39,9 @@ def game_page(request, game_slug):
         Activity.objects.create(visit=True, game_id=game.id)
 
     if request.method == 'POST':
+        if request.POST.get('search') is not None:
+            return redirect('search_page', request.POST.get('search'))
+
         form = ReviewForm(request.POST or None, request.FILES or None)
         if form.is_valid():
             text = form.cleaned_data.get('text')

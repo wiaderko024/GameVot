@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Rate
+from .models import Rate, Review
 from games.models import Game
 from categories.models import Category
+from .forms import ReviewForm
 
 
 @login_required
@@ -48,15 +49,24 @@ def rate_game(request, game_id, rate):
 
 
 @login_required
-def edit_review(request, id):
+def edit_review(request, review_id):
     categories = Category.objects.all()
 
+    review = Review.objects.get(pk=review_id)
+    form = ReviewForm(instance=review)
+
     if request.method == 'POST':
-        wanted = request.POST.get('search')
-        return redirect('search_page', wanted)
+        if request.POST.get('search') is not None:
+            return redirect('search_page', request.POST.get('search'))
+
+        form = ReviewForm(request.POST or None, request.FILES or None, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect('games:game_page', review.game.slug)
 
     context = {
         'categories': categories,
+        'form': form,
     }
 
     return render(request, 'edit_review.html', context=context)
