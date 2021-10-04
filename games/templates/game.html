@@ -79,6 +79,11 @@
             {% for review in reviews %}
                 <div class="card col-md-8 mx-auto mt-4">
                     <div class="card-header">
+                        {% if review.user.profile.avatar != '' %}
+                            <img src="{{ review.user.profile.avatar.url }}" class="img-fluid rounded-circle" width="30px" height="30px" alt="..." style="margin-right: 5px;">
+                        {% else %}
+                            <img src="{% static 'img/user.png' %}" class="img-fluid rounded-circle" width="30px" height="30px" alt="..." style="margin-right: 5px;">
+                        {% endif %}
                         <h5 style="display: inline;">{{ review.user.username }}</h5>
                         <small style="float: right;">{{ review.created_at }}</small>
                     </div>
