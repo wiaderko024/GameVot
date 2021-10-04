@@ -10,6 +10,31 @@
         .star {
             text-decoration: none;
         }
+        .del-rev {
+            color: red;
+            background: transparent;
+            text-decoration: underline;
+        }
+        .del-rev:link {
+            color: red;
+            background: transparent;
+            text-decoration: underline;
+        }
+        .del-rev:visited {
+            color: red;
+            background: transparent;
+            text-decoration: underline;
+        }
+        .del-rev:hover {
+            color: red;
+            background: transparent;
+            text-decoration: underline;
+        }
+        .del-rev:active {
+            color: red;
+            background: transparent;
+            text-decoration: underline;
+        }
     </style>
 {% endblock %}
 
@@ -87,6 +112,7 @@
                         <h5 style="display: inline;">{{ review.user.username }}</h5>
                         {% if review.user == request.user %}
                             <a href="{% url 'reviews:edit_review' review.id %}"><small style="margin-left: 10px;">Edit</small></a>
+                            <a href="{% url 'reviews:delete_review' review.id %}"><small class="del-rev" style="margin-left: 3px;">Delete</small></a>
                         {% endif %}
                         <small style="float: right;">{{ review.created_at }}</small>
                     </div>

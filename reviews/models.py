@@ -5,8 +5,8 @@ from django.utils import timezone
 
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=False, null=False)
-    game = models.ForeignKey(Game, on_delete=models.DO_NOTHING, blank=False, null=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, blank=False, null=False)
     text = models.TextField(default='', blank=False, null=False)
     created_at = models.DateTimeField(editable=False, null=False)
 

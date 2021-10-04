@@ -10,10 +10,10 @@ class Activity(models.Model):
     visit = models.BooleanField(default=False, blank=False, null=False)
     review = models.BooleanField(default=False, blank=False, null=False)
     rate = models.BooleanField(default=False,blank=False, null=False)
-    game = models.ForeignKey(Game, on_delete=models.DO_NOTHING, blank=True, null=True)
-    review_id = models.ForeignKey(Review, on_delete=models.DO_NOTHING, blank=True, null=True)
-    rate_id = models.ForeignKey(Rate, on_delete=models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, blank=True, null=True)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, blank=True, null=True)
+    review_id = models.ForeignKey(Review, on_delete=models.CASCADE, blank=True, null=True)
+    rate_id = models.ForeignKey(Rate, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now, editable=False)
 
     def ___str__(self):

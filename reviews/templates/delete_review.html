@@ -1,0 +1,28 @@
+{% extends 'base_index.html' %}
+{% load static %}
+
+{% block title %}
+    <title>GameVot.com | Delete review</title>
+{% endblock %}
+
+{% block content %}
+    {% include 'navbar.html' with categories=categories %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 mt-5 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Delete your review</h5>
+                    </div>
+                    <div class="card-body">
+                        {{ review.text }}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <button class="btn btn-danger" style="margin-top: 20px; float: right; margin-right: 40px;" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

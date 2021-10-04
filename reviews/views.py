@@ -51,7 +51,6 @@ def rate_game(request, game_id, rate):
 @login_required
 def edit_review(request, review_id):
     categories = Category.objects.all()
-
     review = Review.objects.get(pk=review_id)
     form = ReviewForm(instance=review)
 
@@ -70,3 +69,25 @@ def edit_review(request, review_id):
     }
 
     return render(request, 'edit_review.html', context=context)
+
+
+@login_required
+def delete_review(request, review_id):
+    categories = Category.objects.all()
+    review = Review.objects.get(pk=review_id)
+
+    if request.method == 'POST':
+        if request.POST.get('search'):
+            return redirect('search_page', request.POST.get('search'))
+
+        game_slug = review.game.slug
+        review.delete()
+
+        return redirect('games:game_page', game_slug)
+
+    context = {
+        'categories': categories,
+        'review': review,
+    }
+
+    return render(request, 'delete_review.html', context=context)
