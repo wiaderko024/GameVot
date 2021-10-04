@@ -27,7 +27,7 @@ def home_page(request):
     last_games = []
 
     for i in range(0, 3):
-        last_games.add(games[i])
+        last_games.append(games[i])
 
     context = {
         'categories': categories,
