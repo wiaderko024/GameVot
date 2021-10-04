@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Rate
 from games.models import Game
+from categories.models import Category
 
 
 @login_required
@@ -44,3 +45,18 @@ def rate_game(request, game_id, rate):
         return redirect('games:game_page', game.slug)
 
     return redirect('users:login')
+
+
+@login_required
+def edit_review(request, id):
+    categories = Category.objects.all()
+
+    if request.method == 'POST':
+        wanted = request.POST.get('search')
+        return redirect('search_page', wanted)
+
+    context = {
+        'categories': categories,
+    }
+
+    return render(request, 'edit_review.html', context=context)

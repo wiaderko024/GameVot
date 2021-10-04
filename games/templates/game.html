@@ -85,6 +85,9 @@
                             <img src="{% static 'img/user.png' %}" class="img-fluid rounded-circle" width="30px" height="30px" alt="..." style="margin-right: 5px;">
                         {% endif %}
                         <h5 style="display: inline;">{{ review.user.username }}</h5>
+                        {% if review.user == request.user %}
+                            <a href="{% url 'reviews:edit_review' review.id %}"><small style="margin-left: 10px;">Edit</small></a>
+                        {% endif %}
                         <small style="float: right;">{{ review.created_at }}</small>
                     </div>
                     <div class="card-body">
